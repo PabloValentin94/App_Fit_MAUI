@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="App_Fit_MAUI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:App_Fit_MAUI"
+    xmlns:exercise="clr-namespace:App_Fit_MAUI.View.Modules"
+    Title="App_Fit_MAUI">
+
+    <Shell.Style>
+        <Style TargetType="Shell">
+            <Setter Property="Shell.FlyoutBehavior" Value="Disabled" />
+            <Setter Property="Shell.NavBarIsVisible" Value="False" />
+        </Style>
+    </Shell.Style>
+
+    <TabBar>
+        <ShellContent Title="Sobre" ContentTemplate="{ DataTemplate exercise:About }" Route="About" />
+
+        <ShellContent Title="Listagem" ContentTemplate="{ DataTemplate exercise:ExerciseListing }" Route="Listing" />
+
+        <ShellContent Title="Formulário" ContentTemplate="{ DataTemplate exercise:ExerciseForm }" Route="Form" />
+    </TabBar>
+
+</Shell>

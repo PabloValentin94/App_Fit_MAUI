@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Name="ExerciseListingPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Fit_MAUI.View.Modules.ExerciseListing"
+             Title="ExerciseListing">
+
+    <ContentPage.Content>
+        <Grid ColumnDefinitions="*" RowDefinitions="Auto,*,Auto" Padding="10">
+            <SearchBar Grid.Column="0" Grid.Row="0" Text="{ Binding Search_Value }" Placeholder="Digite algo..." SearchCommand="{ Binding Search }"/>
+
+            <RefreshView Grid.Column="0" Grid.Row="1" Command="{ Binding LoadListing }">
+                <CollectionView ItemsSource="{ Binding Exercises_List }">
+                    <CollectionView.EmptyView>
+                        <Label Text="Nenhum item para ser exibido." HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.Header>
+                        <Label Text="Mantenha o campo de pesquisa em branco e aperte o botão para resetar a listagem de exercícios." FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                    </CollectionView.Header>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="20,*,Auto,Auto" RowDefinitions="Auto" VerticalOptions="Center" Padding="5">
+                                <Label Grid.Column="0" Grid.Row="0" Text="{ Binding Id }" VerticalTextAlignment="Center" />
+                                <Label Grid.Column="1" Grid.Row="0" Text="{ Binding Description }" VerticalTextAlignment="Center" />
+                                <Button Grid.Column="2" Grid.Row="0" Text="✏" BackgroundColor="Transparent" TextColor="White" Command="{ Binding Source={ x:Reference ExerciseListingPage }, Path=BindingContext.EditExercise }" CommandParameter="{ Binding Id }" />
+                                <Button Grid.Column="3" Grid.Row="0" Text="🗑" BackgroundColor="Transparent" TextColor="White" Command="{ Binding Source={ x:Reference ExerciseListingPage }, Path=BindingContext.DeleteExercise }" CommandParameter="{ Binding Id }" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
+            <Button x:Name="btn_new_exercise" Grid.Column="0" Grid.Row="2" Text="Nova Atividade" Clicked="btn_new_exercise_Clicked" />
+        </Grid>
+    </ContentPage.Content>
+    
+</ContentPage>
